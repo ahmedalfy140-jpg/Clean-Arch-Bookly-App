@@ -1,5 +1,5 @@
 
-import 'package:bookly/Features/home/domain/entities/home_entity.dart';
+import 'package:bookly/Features/home/domain/entities/book_entity.dart';
 
 class BookModel extends BookEntity{
   
@@ -7,7 +7,7 @@ class BookModel extends BookEntity{
   final String booktitle;
   final String? author;
   final String? description;
-  final String? bookimage;
+  final String bookimage;
   final double? averageRating;
   final num? ratingCount;
   final String? saleabilitybook;
@@ -18,11 +18,11 @@ class BookModel extends BookEntity{
     required this.booktitle,
     this.author,
     this.description,
-    this.bookimage,
+    required this.bookimage,
     this.averageRating,
     this.ratingCount,
     this.saleabilitybook
-  }) : super(title: booktitle, auther: author, image:bookimage, rating: ratingCount, bookid: id,saleability: saleabilitybook);
+  }) : super(title: booktitle, auther: author, image:bookimage,averageRatingbook: averageRating, rating: ratingCount, bookid: id,saleability: saleabilitybook);
 
   factory BookModel.fromJson(Map<String, dynamic> json) {
     final volumeInfo = json['volumeInfo'] ?? {};
