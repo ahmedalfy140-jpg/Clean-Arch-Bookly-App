@@ -33,6 +33,10 @@ class HomeRemoteDataSourceImpl extends HomeRemoteDataSource{
     var data = await apiServices.get(endpoint: 'flutter',orderBy: 'newest');
 
     List<BookEntity> books = getBooksList(data);
+    // cache newest books 
+      saveData(books,kNewestBook);
+     
+
     return books;
  
   }
