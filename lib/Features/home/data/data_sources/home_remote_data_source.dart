@@ -24,7 +24,7 @@ class HomeRemoteDataSourceImpl extends HomeRemoteDataSource{
 
   @override
   Future<List<BookEntity>> featchNewestBooks()async {
-    var data = await apiServices.get(endpoint: 'flutter');
+    var data = await apiServices.get(endpoint: 'flutter',orderBy: 'newest');
 
     List<BookEntity> books = getBooksList(data);
     return books;
@@ -32,7 +32,7 @@ class HomeRemoteDataSourceImpl extends HomeRemoteDataSource{
   }
    List<BookEntity> getBooksList(Map<String, dynamic> data) {
      List<BookEntity> books= [];
-    for (var item in data['item']) {
+    for (var item in data['items']) {
       books.add(BookModel.fromJson(item));
       
     }

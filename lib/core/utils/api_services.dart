@@ -6,11 +6,12 @@
     final apikey='AIzaSyCJewSRb7k3o4QyKNoL3aGj9dYWV_vZ95w';
 
     ApiServices(this._dio);
-    Future <Map<String,dynamic>> get({ required String endpoint})async{
+    Future <Map<String,dynamic>> get({ required String endpoint,String? orderBy})async{
       var response = await _dio.get(baseUrl,
       queryParameters: {
         'q':endpoint,
-        'key':apikey
+        'key':apikey,
+        'orderBy':orderBy
       }
       
       
