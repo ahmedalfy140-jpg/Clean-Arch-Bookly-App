@@ -16,7 +16,7 @@ class HomeRepoImpl extends HomeRepo{
     try {
       List<BookEntity> books;
       books = homeLocalDataSource.featchFeaturBooks();
-      if(books.isEmpty){
+      if(books.isNotEmpty){
         return right(books);
       }
        books= await homeRemoteDataSource.featchFeaturBooks(); 
@@ -37,8 +37,8 @@ class HomeRepoImpl extends HomeRepo{
     try {
       List<BookEntity>books;
 
-         books = homeLocalDataSource.featchFeaturBooks();
-      if(books.isEmpty){
+         books = homeLocalDataSource.featchNewestBooks();
+      if(books.isNotEmpty){
         return right(books);
       }
        books = await homeRemoteDataSource.featchNewestBooks();

@@ -10,23 +10,23 @@ import 'package:bookly/core/utils/bloc_observer.dart';
 import 'package:bookly/core/utils/service_locator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get_it/get_it.dart';
+
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/adapters.dart';
 
 void main() async {
-
+  WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
   Hive.registerAdapter(BookEntityAdapter());
   setupServiceLocator();
 
-  await Hive.openBox(kFeaturedBook);
-  await Hive.openBox(kNewestBook);
-  Bloc.observer=SimpleBlocObserver();
-    runApp(const Bookly());
+  await Hive.openBox<BookEntity>(kFeaturedBook);
+  await Hive.openBox<BookEntity>(kNewestBook);
+  Bloc.observer = SimpleBlocObserver();
+  runApp(const Bookly());
 }
 
-final getIt = GetIt.instance;
+// final getIt = GetIt.instance;
 
 class Bookly extends StatelessWidget {
   const Bookly({Key? key}) : super(key: key);
@@ -38,14 +38,14 @@ class Bookly extends StatelessWidget {
         BlocProvider(create: (context) {
           return FeatureBookCubit(
             FeatchFeatureBooksUseCase(
-              getIt.get<HomeRepoImpl>(),
+              getit.get<HomeRepoImpl>(),
             ),
-          );
+          )..fetchFeatureBooks();
         }),
-           BlocProvider(create: (context) {
+        BlocProvider(create: (context) {
           return NewestBooksCubit(
             FeatchNewestBooksUseCase(
-              getIt.get<HomeRepoImpl>(),
+              getit.get<HomeRepoImpl>(),
             ),
           );
         }),

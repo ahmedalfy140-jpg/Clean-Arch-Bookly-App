@@ -16,7 +16,7 @@ class HomeRemoteDataSourceImpl extends HomeRemoteDataSource{
   HomeRemoteDataSourceImpl(this.apiServices);
   @override
   Future<List<BookEntity>> featchFeaturBooks()async {
-    var data = await apiServices.get(endpoint: 'flutter');
+    var data = await apiServices.get(endpoint: 'programming',orderBy: 'relevance');
 
     List<BookEntity> books = getBooksList(data);
     // cached featured books
@@ -50,7 +50,7 @@ class HomeRemoteDataSourceImpl extends HomeRemoteDataSource{
   }
   // save box data function
    void saveData(List<BookEntity> books, String boxName) {
-      var box=Hive.box(boxName);
+      var box=Hive.box<BookEntity>(boxName);
     box.addAll(books);
   }
 }
