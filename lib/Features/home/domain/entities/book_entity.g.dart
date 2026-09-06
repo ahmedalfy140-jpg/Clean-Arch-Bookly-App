@@ -19,7 +19,7 @@ class BookEntityAdapter extends TypeAdapter<BookEntity> {
     return BookEntity(
       title: fields[1] as String,
       auther: fields[2] as String?,
-      image: fields[3] as String?,
+      image: fields[3] as String,
       rating: fields[4] as num?,
       bookid: fields[0] as String,
       saleability: fields[5] as String?,

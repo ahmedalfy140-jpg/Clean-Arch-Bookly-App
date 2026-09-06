@@ -47,7 +47,7 @@ class Bookly extends StatelessWidget {
             FeatchNewestBooksUseCase(
               getit.get<HomeRepoImpl>(),
             ),
-          );
+          )..fetchNewestBooks();
         }),
       ],
       child: MaterialApp.router(

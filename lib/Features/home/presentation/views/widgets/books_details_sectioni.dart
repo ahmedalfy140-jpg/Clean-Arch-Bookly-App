@@ -6,7 +6,9 @@ import 'books_action.dart';
 import 'custom_book_item.dart';
 
 class BookDetailsSection extends StatelessWidget {
-  const BookDetailsSection({super.key});
+  const BookDetailsSection({super.key,  });
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +20,7 @@ class BookDetailsSection extends StatelessWidget {
           padding: EdgeInsets.symmetric(
             horizontal: width * .2,
           ),
-          child: const CustomBookImage(image: '',),
+          child:  const CustomBookImage(image:'http://books.google.com/books/content?id=0Q--epKpkWYC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api'),
         ),
         const SizedBox(
           height: 43,

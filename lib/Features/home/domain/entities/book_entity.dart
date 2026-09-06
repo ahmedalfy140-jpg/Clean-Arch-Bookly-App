@@ -9,7 +9,7 @@ class BookEntity {
   @HiveField(2)
   final String? auther;
   @HiveField(3)
-  final String? image;
+  final String image;
   @HiveField(4)
   final num? rating;
   @HiveField(5)
