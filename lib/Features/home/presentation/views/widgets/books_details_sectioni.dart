@@ -1,13 +1,13 @@
+import 'package:bookly/Features/home/domain/entities/book_entity.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../core/utils/styles.dart';
-import 'book_rating.dart';
 import 'books_action.dart';
 import 'custom_book_item.dart';
 
 class BookDetailsSection extends StatelessWidget {
-  const BookDetailsSection({super.key,  });
-
+  const BookDetailsSection({super.key, required this.books,  });
+final BookEntity books ;
 
 
   @override
@@ -15,20 +15,26 @@ class BookDetailsSection extends StatelessWidget {
     var width = MediaQuery.of(context).size.width;
 
     return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Padding(
           padding: EdgeInsets.symmetric(
             horizontal: width * .2,
           ),
-          child:  const CustomBookImage(image:'http://books.google.com/books/content?id=0Q--epKpkWYC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api'),
+          child:   CustomBookImage(image:books.image),
         ),
         const SizedBox(
           height: 43,
         ),
-        Text(
-          'The Jungle Book',
-          style: Styles.textStyle30.copyWith(
-            fontWeight: FontWeight.bold,
+        SizedBox(
+          width: double.infinity,
+          child: Text(
+            textAlign: TextAlign.center,
+            books.title,
+            style: Styles.textStyle30.copyWith(
+              fontWeight: FontWeight.bold,
+              
+            ),
           ),
         ),
         const SizedBox(
@@ -37,7 +43,7 @@ class BookDetailsSection extends StatelessWidget {
         Opacity(
           opacity: .7,
           child: Text(
-            'Rudyard Kipling',
+            books.auther??'',
             style: Styles.textStyle18.copyWith(
               fontStyle: FontStyle.italic,
               fontWeight: FontWeight.w500,
@@ -47,9 +53,9 @@ class BookDetailsSection extends StatelessWidget {
         const SizedBox(
           height: 18,
         ),
-        const BookRating(
-          mainAxisAlignment: MainAxisAlignment.center,
-        ),
+        // const BookRating(
+        //   mainAxisAlignment: MainAxisAlignment.center,,
+        // ),
         const SizedBox(
           height: 37,
         ),

@@ -1,4 +1,4 @@
-import 'package:bookly/Features/home/presentation/views/widgets/Featurebookslistviewblocbuilder.dart';
+import 'package:bookly/Features/home/presentation/views/widgets/featurebookslistviewblocbuilder.dart';
 import 'package:bookly/core/utils/styles.dart';
 import 'package:flutter/material.dart';
 import 'best_seller_list_view.dart';
