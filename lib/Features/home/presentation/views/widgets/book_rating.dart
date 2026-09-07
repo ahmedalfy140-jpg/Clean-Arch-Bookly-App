@@ -1,4 +1,3 @@
-import 'package:bookly/Features/home/domain/entities/book_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -7,11 +6,14 @@ import '../../../../../core/utils/styles.dart';
 class BookRating extends StatelessWidget {
   const BookRating({
     super.key,
-    this.mainAxisAlignment = MainAxisAlignment.start, required this.book,
+    this.mainAxisAlignment = MainAxisAlignment.start,  required this.bookRating, required this.averageRatingbook,
   });
 
   final MainAxisAlignment mainAxisAlignment;
-  final BookEntity book;
+  
+  final String  bookRating;
+  final String averageRatingbook;
+
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -26,7 +28,7 @@ class BookRating extends StatelessWidget {
           width: 6.3,
         ),
          Text(
-          book.averageRatingbook.toString(),
+          averageRatingbook,
           style: Styles.textStyle16,
         ),
         const SizedBox(
@@ -35,7 +37,7 @@ class BookRating extends StatelessWidget {
         Opacity(
           opacity: .5,
           child: Text(
-            '(${book.rating.toString()})',
+           '($bookRating)',
             style: Styles.textStyle14.copyWith(
               fontWeight: FontWeight.w600,
             ),

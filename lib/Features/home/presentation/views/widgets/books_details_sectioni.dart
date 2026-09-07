@@ -1,4 +1,5 @@
 import 'package:bookly/Features/home/domain/entities/book_entity.dart';
+import 'package:bookly/Features/home/presentation/views/widgets/book_rating.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../core/utils/styles.dart';
@@ -53,9 +54,9 @@ final BookEntity books ;
         const SizedBox(
           height: 18,
         ),
-        // const BookRating(
-        //   mainAxisAlignment: MainAxisAlignment.center,,
-        // ),
+         BookRating(
+          mainAxisAlignment: MainAxisAlignment.center, bookRating: books.rating.toString(), averageRatingbook: books.averageRatingbook.toString(),
+        ),
         const SizedBox(
           height: 37,
         ),
