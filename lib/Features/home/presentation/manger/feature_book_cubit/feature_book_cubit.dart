@@ -5,9 +5,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class FeatureBookCubit extends Cubit<FeatureBooksState> {
   FeatureBookCubit(this.featchFeatureBooksUseCase) : super(FeatureBookInitial());
   final FeatchFeatureBooksUseCase featchFeatureBooksUseCase;
-  Future<void> fetchFeatureBooks() async {
+  Future<void> fetchFeatureBooks({int pageNumber =0 }) async {
     emit(FeatureBookLoading());
-    var result = await featchFeatureBooksUseCase.call();
+    var result = await featchFeatureBooksUseCase.call(pageNumber);
     result.fold(
       (failure) {
         emit(FeatureBookFailure(failure.errorMessage));

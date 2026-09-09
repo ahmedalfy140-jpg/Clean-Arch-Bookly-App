@@ -6,7 +6,7 @@ import 'package:bookly/core/utils/api_services.dart';
 import 'package:hive/hive.dart';
 
 abstract class HomeRemoteDataSource {
-  Future<List<BookEntity>> featchFeaturBooks();
+  Future<List<BookEntity>> featchFeaturBooks({int pageNumber =0});
   Future<List<BookEntity>> featchNewestBooks();
 }
 
@@ -15,12 +15,12 @@ class HomeRemoteDataSourceImpl extends HomeRemoteDataSource{
 
   HomeRemoteDataSourceImpl(this.apiServices);
   @override
-  Future<List<BookEntity>> featchFeaturBooks()async {
-    var data = await apiServices.get(endpoint: 'programming',orderBy: 'relevance');
+  Future<List<BookEntity>> featchFeaturBooks({int pageNumber =1})async {
+    var data = await apiServices.get(endpoint: 'flutter',orderBy: 'relevance',startIndex: pageNumber*10);
 
     List<BookEntity> books = getBooksList(data);
     // cached featured books
-    saveData(books,kFeaturedBook);
+     saveData(books,kFeaturedBook);
     return books;
   }
 
@@ -30,7 +30,7 @@ class HomeRemoteDataSourceImpl extends HomeRemoteDataSource{
 
   @override
   Future<List<BookEntity>> featchNewestBooks()async {
-    var data = await apiServices.get(endpoint: 'flutter',orderBy: 'newest');
+    var data = await apiServices.get(endpoint: 'programing',orderBy: 'newest',startIndex: 30);
 
     List<BookEntity> books = getBooksList(data);
     // cache newest books 

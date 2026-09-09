@@ -20,7 +20,7 @@ class BookListViewItem extends StatelessWidget {
         GoRouter.of(context).push(AppRouter.kBookDetailsView,extra: book);
       },
       child: SizedBox(
-        height: 125,
+        height: 130,
         child: Row(
           children: [
             AspectRatio(
@@ -63,6 +63,8 @@ class BookListViewItem extends StatelessWidget {
                     height: 3,
                   ),
                    Text(
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
                     book.auther??'',
                     style: Styles.textStyle14,
                   ),
