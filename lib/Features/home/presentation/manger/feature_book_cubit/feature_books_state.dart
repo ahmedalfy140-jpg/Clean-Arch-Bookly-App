@@ -5,6 +5,10 @@ abstract class FeatureBooksState {}
 
 class FeatureBookInitial extends FeatureBooksState {}
 class FeatureBookLoading extends FeatureBooksState {}
+class FeatureBookPaginiationLoading extends FeatureBooksState {}
+class FeatureBookPaginiationFaiure extends FeatureBooksState {final String errMessage;
+
+  FeatureBookPaginiationFaiure(this.errMessage);}
 class FeatureBookFailure extends FeatureBooksState {final String errMessage ;
 
   FeatureBookFailure(this.errMessage); }

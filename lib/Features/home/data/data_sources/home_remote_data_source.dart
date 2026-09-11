@@ -15,8 +15,8 @@ class HomeRemoteDataSourceImpl extends HomeRemoteDataSource{
 
   HomeRemoteDataSourceImpl(this.apiServices);
   @override
-  Future<List<BookEntity>> featchFeaturBooks({int pageNumber =1})async {
-    var data = await apiServices.get(endpoint: 'flutter',orderBy: 'relevance',startIndex: pageNumber*10);
+  Future<List<BookEntity>> featchFeaturBooks({int pageNumber =0})async {
+    var data = await apiServices.get(endpoint: 'programing',orderBy: 'relevance',startIndex: pageNumber*10);
 
     List<BookEntity> books = getBooksList(data);
     // cached featured books
@@ -42,7 +42,7 @@ class HomeRemoteDataSourceImpl extends HomeRemoteDataSource{
   }
    List<BookEntity> getBooksList(Map<String, dynamic> data) {
      List<BookEntity> books= [];
-    for (var item in data['items']) {
+    for (var item in data['items']??[]) {
       books.add(BookModel.fromJson(item));
       
     }

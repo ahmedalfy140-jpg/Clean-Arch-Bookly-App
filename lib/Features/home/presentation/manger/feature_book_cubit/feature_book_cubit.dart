@@ -3,14 +3,29 @@ import 'package:bookly/Features/home/presentation/manger/feature_book_cubit/feat
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class FeatureBookCubit extends Cubit<FeatureBooksState> {
-  FeatureBookCubit(this.featchFeatureBooksUseCase) : super(FeatureBookInitial());
+  FeatureBookCubit(this.featchFeatureBooksUseCase)
+      : super(FeatureBookInitial());
   final FeatchFeatureBooksUseCase featchFeatureBooksUseCase;
-  Future<void> fetchFeatureBooks({int pageNumber =0 }) async {
-    emit(FeatureBookLoading());
+  Future<void> fetchFeatureBooks({int pageNumber = 0}) async {
+    if (pageNumber == 0) {
+      emit(
+        FeatureBookLoading(),
+      );
+    } else {
+      emit(FeatureBookPaginiationLoading());
+    }
     var result = await featchFeatureBooksUseCase.call(pageNumber);
     result.fold(
       (failure) {
-        emit(FeatureBookFailure(failure.errorMessage));
+        if (pageNumber == 0) {
+          emit(
+            FeatureBookFailure(failure.errorMessage),
+          );
+        } else {
+          emit(
+            FeatureBookPaginiationFaiure(failure.errorMessage),
+          );
+        }
       },
       (books) {
         emit(FeatureBookSuccess(books));

@@ -41,7 +41,7 @@ class BookModel extends BookEntity{
       description: volumeInfo['description'],
 
       // imageLinks can be missing
-      bookimage: volumeInfo['imageLinks']?['thumbnail'],
+      bookimage: volumeInfo['imageLinks']?['thumbnail']??'',
 
       saleabilitybook: json['saleInfo']['saleability']??'Free',
 

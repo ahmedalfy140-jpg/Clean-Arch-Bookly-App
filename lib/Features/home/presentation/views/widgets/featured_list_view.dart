@@ -6,7 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'custom_book_item.dart';
 
 class FeaturedBooksListView extends StatefulWidget {
-   FeaturedBooksListView({Key? key, required this.books,})
+   const FeaturedBooksListView({Key? key, required this.books,})
       : super(key: key);
   final List<BookEntity> books;
   
@@ -18,6 +18,7 @@ class FeaturedBooksListView extends StatefulWidget {
 class _FeaturedBooksListViewState extends State<FeaturedBooksListView> {
  late final ScrollController _scrollController ;
  var nextPage =1;
+ var isLoading=false;
   @override
   void initState(){
     super.initState();
@@ -25,11 +26,15 @@ class _FeaturedBooksListViewState extends State<FeaturedBooksListView> {
     _scrollController.addListener(_scrollListener);
 
   }
-  void _scrollListener(){
+  void _scrollListener()async{
     var currentPosition= _scrollController.position.pixels;
     var maxScrollLength=_scrollController.position.maxScrollExtent;
     if(currentPosition>=0.7* maxScrollLength){
-      BlocProvider.of<FeatureBookCubit>(context).fetchFeatureBooks(pageNumber:nextPage++ );
+      if (!isLoading) {
+        isLoading=true;
+       await BlocProvider.of<FeatureBookCubit>(context).fetchFeatureBooks(pageNumber:nextPage++ );
+        isLoading=false;
+      }
     }
   }
   @override
@@ -49,7 +54,7 @@ class _FeaturedBooksListViewState extends State<FeaturedBooksListView> {
             return Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8),
               child: CustomBookImage(
-                image: widget.books[index].image ?? '',
+                image: widget.books[index].image ,
               ),
             );
           }),
