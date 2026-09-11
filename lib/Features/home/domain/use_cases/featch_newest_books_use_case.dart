@@ -10,8 +10,8 @@ class FeatchNewestBooksUseCase extends UseCase<List<BookEntity>,NoParameter> {
   FeatchNewestBooksUseCase(this.homeRepo);
 
   @override
-  Future<Either<Failure, List<BookEntity>>> call([int? parameter])async {
-   return await homeRepo.featchNewestBooks();
+  Future<Either<Failure, List<BookEntity>>> call([int pageNumber=0])async {
+   return await homeRepo.featchNewestBooks(pageNumber: pageNumber);
     
   }
 

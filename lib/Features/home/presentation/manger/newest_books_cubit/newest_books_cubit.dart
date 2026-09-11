@@ -6,11 +6,19 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class NewestBooksCubit extends Cubit<NewestBooksState> {
   NewestBooksCubit(this.featchNewestBooksUseCase) : super(NewestBooksInitail());
   final FeatchNewestBooksUseCase featchNewestBooksUseCase;
-  Future <void> fetchNewestBooks ()async{
-    emit(NewestBooksLoading());
-    var result = await featchNewestBooksUseCase.call();
+  Future <void> fetchNewestBooks ({int pageNumber =0})async{
+   if (pageNumber==0){
+     emit(NewestBooksLoading());
+   }else {
+    emit(NewestBookPaginiationLoading());
+   }
+    var result = await featchNewestBooksUseCase.call( pageNumber, );
     result.fold((failure){
-      emit(NewestBooksFailure(failure.errorMessage));
+     if ( pageNumber==0){
+       emit(NewestBooksFailure(failure.errorMessage));
+     }else{
+      emit(NewsetBookPaginiationFaiure(failure.errorMessage));
+     }
     }, (books){
       emit(NewestBooksSuccess(books));
     });

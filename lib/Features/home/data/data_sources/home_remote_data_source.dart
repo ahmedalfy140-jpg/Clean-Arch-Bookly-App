@@ -7,7 +7,7 @@ import 'package:hive/hive.dart';
 
 abstract class HomeRemoteDataSource {
   Future<List<BookEntity>> featchFeaturBooks({int pageNumber =0});
-  Future<List<BookEntity>> featchNewestBooks();
+  Future<List<BookEntity>> featchNewestBooks({int pageNumber =0});
 }
 
 class HomeRemoteDataSourceImpl extends HomeRemoteDataSource{
@@ -16,7 +16,7 @@ class HomeRemoteDataSourceImpl extends HomeRemoteDataSource{
   HomeRemoteDataSourceImpl(this.apiServices);
   @override
   Future<List<BookEntity>> featchFeaturBooks({int pageNumber =0})async {
-    var data = await apiServices.get(endpoint: 'programing',orderBy: 'relevance',startIndex: pageNumber*10);
+    var data = await apiServices.get(endpoint: 'medical',orderBy: 'relevance',startIndex: pageNumber*10);
 
     List<BookEntity> books = getBooksList(data);
     // cached featured books
@@ -29,8 +29,8 @@ class HomeRemoteDataSourceImpl extends HomeRemoteDataSource{
  
 
   @override
-  Future<List<BookEntity>> featchNewestBooks()async {
-    var data = await apiServices.get(endpoint: 'programing',orderBy: 'newest',startIndex: 30);
+  Future<List<BookEntity>> featchNewestBooks({int pageNumber =0})async {
+    var data = await apiServices.get(endpoint: 'history',orderBy: 'newest',startIndex: pageNumber*10);
 
     List<BookEntity> books = getBooksList(data);
     // cache newest books 
